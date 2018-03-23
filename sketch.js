@@ -1,24 +1,32 @@
 var count =0;
 var contCarro = 100;
+var contCarro2 = 100;
+var contCarro1 = 100;
 var img;
+var xx = 180;
 function setup() {
   createCanvas(400, 400);
 	//rectMode(CENTER);
-	
+	img = loadImage("./carro.jpg")
+	a=10;
+	b=10;
+	c=10;
 }
 
 function draw() {
-	//generarCarro();
-	//contCarro = Math.random() * (0-(101))-(101);
+
+	image(img,200,200);
+	image(img, 0, height/2, img.width/2, img.height/2);
+	
 	var x = width / 2;
 	var y = height - count; 
-	var yCarro = height - contCarro;
+	var yCarro = height - contCarro1;
+	var xCarro = height - contCarro2;
+	var zCarro = height - contCarro;
 	background(220);
 	//jugador
-	rect (180,280,40,100);
+	rect (xx,280,40,70,20);
 	//izquierda
-	//carroIzquierda(10,10,10,10);
-	var p = p + random(20,-20);
 	rect (40,0,5,400);
 	rect (50,y-0,5,30);
 	rect (50,y-40,5,30);
@@ -58,25 +66,53 @@ function draw() {
 	rect (150,0,5,400);
 	rect (250,0,5,400);
 	//movimiento de lineas de carril
-	ra = Math.random() * (0-(10))-(10);
 	count -= 3;
 	if(count < -200){
 		count = 0;
+		// contCarro = velocidad();
+		// contCarro2 = velocidad();
 	} 
-	ra = Math.random() * (0-(10))-(10);
-	//console.log(ra);
 	//generacion de carros a la izquierda
-	var carroIzquierda = rect (80,yCarro-400,40,100);
-	contCarro -= 2;
+	var carroIzquierda = rect (80,yCarro-400,40,70);
+	contCarro1 -= a;
+	if(contCarro1 < -400){
+		contCarro1 = posicion();
+		a = velocidad();
+	}
+	//generacion de carros al centro
+	var carroCentro = rect (180,zCarro-400,40,70);
+	contCarro -= b;
 	if(contCarro < -400){
-		contCarro = 100;
+		contCarro = posicion();
+		b = velocidad();
 	}
 	//generacion de carros a la derecha
-	var carroDerecha = rect (280,yCarro-400,40,100);
-	contCarro -= 5;
-	if(contCarro < -400){
-		contCarro = 100;
+	var carroDerecha = rect (280,xCarro-400,40,70);
+	contCarro2 -= c;
+	if(contCarro2 < -400){
+		contCarro2 = posicion();
+		c = velocidad();
 	}
+}
+
+function keyPressed(){
+	if (keyCode == 37){
+		if (xx!=80){
+			xx -= 100;
+		}
+	}
+	if (keyCode == 39){
+		if (xx!=280){
+			xx += 100;
+		}
+	}
+}
+
+function velocidad(){
+	return random(5,8);
+}
+function posicion(){
+	return random(100,200);
 }
 
 function generarCarro(){
