@@ -1,8 +1,10 @@
 var count =0;
 var contCarro = 100;
+var img;
 function setup() {
   createCanvas(400, 400);
 	//rectMode(CENTER);
+	
 }
 
 function draw() {
